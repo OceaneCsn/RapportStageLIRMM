@@ -1,0 +1,121 @@
+\documentclass[french]{llncs}
+
+\usepackage[english, french]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage{hyperref}
+\usepackage{dirtytalk}
+
+\usepackage{color}
+\usepackage{caption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\renewcommand{\algorithmicrequire}{\textbf{Entrée:}}
+\renewcommand{\algorithmicensure}{\textbf{Sortie:}}
+\renewcommand{\algorithmiccomment}[1]{\{#1\}}
+\renewcommand{\algorithmicend}{\textbf{fin}}
+\renewcommand{\algorithmicif}{\textbf{si}}
+\renewcommand{\algorithmicthen}{\textbf{alors}}
+\renewcommand{\algorithmicelse}{\textbf{sinon}}
+\renewcommand{\algorithmicfor}{\textbf{pour}}
+\renewcommand{\algorithmicforall}{\textbf{pour tout}}
+\renewcommand{\algorithmicdo}{\textbf{faire}}
+\renewcommand{\algorithmicwhile}{\textbf{tant que}}
+\renewcommand{\algorithmicelsif}{\algorithmicelse\ \algorithmicif}
+\renewcommand{\algorithmicendif}{\algorithmicend\ \algorithmicif}
+\renewcommand{\algorithmicendfor}{\algorithmicend\ \algorithmicfor}
+
+%-----------------------------------------
+\title{Apprentissage statistique pour la prédiction des interactions chromosomiques}
+
+%\subtitle{\vspace{.5cm}Rapport de Master}
+
+\author{ Océane \textsc{Cassan} 
+\newline{}{Encadrée par Laurent \textsc{Bréhélin}, Charles-Henri \textsc{Lecellier}, Sophie \textsc{Lèbre}}}
+
+
+\institute{INSA de Lyon}
+
+
+\lstset{ 
+    basicstyle=\small,
+    captionpos=b  % sets the caption-position to bottom
+}
+
+
+\providecommand{\motcles}[1]{\textbf{Mots-clés:} #1}
+
+\pagestyle{headings} 
+%-----------------------------------------
+
+\begin{document}
+
+\clearpage\thispagestyle{empty}\addtocounter{page}{-1} 
+
+    \renewcommand{\thelstlisting}{\arabic{lstlisting}}
+
+    \maketitle
+
+    \vfill
+    \selectlanguage{french}
+    \begin{abstract} Dans le cadre de mon double cursus avec le Master en intelligence artificielle de Lyon1, j'ai rédigé un rapport compatible avec les attentes des deux formations. Les éléments non demandés par l'université mais requis par les consignes INSA sont fournis dans ce rapport complémentaire. Il s'agit de la description de l'organisme d'accueil, ainsi que du rapport d'étonnement. 
+    
+\\
+    \vfill
+
+\clearpage
+   
+
+%-----------------------------------------
+
+
+\clearpage\thispagestyle{empty}\addtocounter{page}{-1} 
+
+\section{Le LIRMM}
+
+Le \textbf{LIRMM} est le laboratoire de recherche en Informatique, Robotique et Microélectronique de Montpellier. Il se situe sur le campus Saint-Priest, au Nord-Ouest de la ville.
+
+Il s'agit d'une unité mixte créée en 1992 dépendant du Centre National de la Recherche Scientifique ainsi que de l'université de Montpellier. Les recherches menées au LIRMM portent sur les domaines des sciences et technologies de l’information, de la communication et des systèmes.
+Comme tout laboratoire de recherche, le LIRMM a pour vocation la création de connaissances scientifiques, la formation et l'emploi de chercheurs, la réalisation de prototypes, ainsi que le partenariat avec le secteur privé.
+
+Avec un budget en 2018 de 18,6 millions d'euros, le LIRMM compte environ 400 employés, dont la moitié en tant que membres permanents, et une centaine de doctorants. L'équipe de direction est renouvelée tous les 5 ans, avec actuellement Mr Phillipe Poignet à sa tête.
+Entre 2008 et 2013, la création de 24 start-up a été accompagnée par le laboratoire.
+
+Trois grands axes se dégagent quant aux thèmes étudiés : 
+
+\begin{itemize}
+    \item L'\textbf{informatique} : algorithmique des graphes, bioinformatique, cryptographie, réseaux, bases de données et systèmes d'information, génie logiciel, intelligence artificielle, systèmes multi-agents, interaction homme-machine.
+    
+    \item La \textbf{micro-électronique} : conception de systèmes embarqués intelligents, efficaces, adaptables et sécurisés dans le cadre de l'exploration  environnementale, de la navigation dans les milieux extrêmes, de l'IoT, etc.
+    
+    \item La \textbf{robotique} : étude de la robotique dans le cadre de l’environnement, l’industrie manufacturière, la santé et l’interaction avec l'homme. 
+\end{itemize}
+
+Plus précisément, mon stage ce déroule dans l'axe intitulé informatique, au sein l'équipe \textbf{MAB} : Méthodes et Algorithmes pour la Bioinformatique. Elle a pour objectif l'analyse de phénomènes biologiques par les outils numériques et mathématiques adaptés. Elle se spécialise dans l'algorithmique du texte et méthodes pour l'analyse du séquençage à haut débit, les méthodes pour l’inférence évolutive, ainsi que dans les outils pour l’annotation fonctionnelle. 
+
+Sous la responsabilité de Mr Bréhélin, elle se compose de membres permanents (chargés de recherches CNRS, Maitres de conférences CNRS, Professeurs des universités), et de membres non permanents (post-doctorants, doctorants, chercheurs, ingénieurs ou techniciens en CDD). De nombreux chercheurs sont affiliés à d'autres organismes de recherches, en biologie ou en statistiques par exemple, et collaborent au sein de l'équipent.
+
+L'organisme finançant ce stage est d'ailleurs l'IGMM, l'Institut de Génétique Moléculaire de Montpellier, où travaille mon tuteur officiel Mr Charles Lecellier. 
+
+\newpage
+
+
+\section{Rapport d'étonnement} 
+
+Au cours de ce stage, beaucoup de découvertes ont été faites. J'ai pu découvrir comment gérer les aléas de la recherche sur un plan personnel. Il s'agit d'un domaine dans lequel les résultats ne sont pas garantis, malgré le temps de travail consacré. Il peut en effet s'avérer qu'une piste explorée ne porte pas d'information pour des raisons qu'il était impossible de prévoir à priori. C'est ce qu'il s'est produit dans la première partie de mon stage, pendant laquelle nos tentatives pour prédire les paires enhancer-promoteur sur la base de la séquence uniquement se sont avérées non fructueuses. Il devient alors difficile de savoir s'il s'agit d'un problème dans les données, d'une erreur d'implémentation, ou bien d'un réel fait biologique. Prendre du recul, rester motivé et penser à des méthodes alternatives est nécessaire. De même, trouver un compromis efficace entre autonomie et demande d'aide est un processus parfois délicat.
+
+Ce projet n'a pas participé ou donné lieu à une publication scientifique, bien que les procédés de rédaction, de soumission et de publication m'auraient beaucoup intéressée.
+
+Même si mon projet n'a pas impliqué de travail en directe collaboration avec d'autres chercheurs, communiquer avec eux s'est toujours avéré très utile, afin d'élargir mes perspectives et de découvrir de nouvelles pistes. 
+
+Une grande liberté d'organisation et en horaires de présence m'a été laissée, ce qui fut pour moi une atmosphère très propice à la curiosité intellectuelle. Cela m'a permis de prendre le temps de rechercher un grand nombre d'informations complémentaires plus ou moins proches du projet initial. Je considère maintenant que se documenter sur des sujets annexes est un devoir de chercheur autant qu'un épanouissement personnel.
+
+
+
+Ce stage a permis une réelle immersion dans le monde de la recherche. Il m'a été possible de réaliser l'intrication au sein d'un même équipe de différentes spécialités et compétences. J'ai particulièrement apprécié la nature pluri-disciplinaire du projet impliquant à la fois des informaticiens, des statisticiens, et des biologistes. Les réunions, les séminaires, les conférences en dehors du laboratoire nourrissent richement la communauté d'experts autant que d'étudiants : il s'agit d'un milieu très stimulant dans lequel évoluer, qui motive par poursuite en thèse à la rentrée.
+
+\end{document}
